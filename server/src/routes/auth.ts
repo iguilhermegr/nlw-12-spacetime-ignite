@@ -1,5 +1,5 @@
-import axios from 'axios'
 import { FastifyInstance } from 'fastify'
+import axios from 'axios'
 import { z } from 'zod'
 import { prisma } from '../lib/prisma'
 
@@ -37,8 +37,8 @@ export async function authRoutes(app: FastifyInstance) {
     const userSchema = z.object({
       id: z.number(),
       login: z.string(),
-      avatar_url: z.string().url(),
       name: z.string(),
+      avatar_url: z.string().url(),
     })
 
     const userInfo = userSchema.parse(userResponse.data)
@@ -54,8 +54,8 @@ export async function authRoutes(app: FastifyInstance) {
         data: {
           githubId: userInfo.id,
           login: userInfo.login,
-          avatarUrl: userInfo.avatar_url,
           name: userInfo.name,
+          avatarUrl: userInfo.avatar_url,
         },
       })
     }
